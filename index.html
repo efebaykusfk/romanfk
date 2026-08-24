@@ -7,7 +7,100 @@
 <title>Roman FK | Resmi Site</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+/* ANA MAVİ RENKLER */
+
+:root{
+    --acik-mavi:#38bdf8;
+    --koyu-mavi:#075985;
+    --lacivert:#0f172a;
+}
+
+/* KIRMIZI YERİNE MAVİ IŞIK */
+
+body::before{
+    background:var(--acik-mavi);
+}
+
+body::after{
+    background:var(--koyu-mavi);
+}
+
+/* LOGO YAZISI */
+
+.logoText span{
+    color:var(--koyu-mavi);
+}
+
+/* MENÜ */
+
+.navLinks a:hover{
+    color:var(--acik-mavi);
+}
+
+/* BAŞLIKLAR */
+
+.hero h1 span,
+.sectionTitle span{
+    color:var(--koyu-mavi);
+}
+
+/* KIRMIZI ÇİZGİ */
+
+.redLine{
+    background:linear-gradient(
+        90deg,
+        var(--acik-mavi),
+        var(--koyu-mavi)
+    );
+}
+
+/* INSTAGRAM BUTONU */
+
+.instagram{
+    background:linear-gradient(
+        135deg,
+        var(--acik-mavi),
+        var(--koyu-mavi)
+    );
+
+    color:white;
+
+    box-shadow:
+        0 12px 30px rgba(7,89,133,.25);
+}
+
+.instagram:hover{
+    box-shadow:
+        0 18px 40px rgba(7,89,133,.40);
+}
+
+/* KARTLAR */
+
+.aboutCard:hover{
+    border-color:var(--acik-mavi);
+}
+
+/* İSTATİSTİK KARTLARI */
+
+.stat:hover{
+    background:var(--koyu-mavi);
+}
+
+/* INSTAGRAM KUTUSU */
+
+.instagramBox::before{
+    background:var(--acik-mavi);
+}
+
+.instagramBox h2 span{
+    color:var(--acik-mavi);
+}
+
+/* FOOTER */
+
+footer strong{
+    color:var(--koyu-mavi);
+}
 
 *{
     margin:0;
