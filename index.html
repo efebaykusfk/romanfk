@@ -1,297 +1,614 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>Roman FK</title>
 
 <style>
 
 /* =====================================================
-   ROMAN FK
-   BEYAZ + AÇIK MAVİ + KOYU MAVİ
-   ===================================================== */
+   ROMAN FK - ANA TASARIM
+===================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
-
-/* =========================
-   TEMEL
-   ========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Montserrat',sans-serif;
-    background:#ffffff;
-    color:#0f172a;
-    overflow-x:hidden;
-}
-
-
-/* =========================
-   RENKLER
-   ========================= */
-
 :root{
+
     --acik-mavi:#38bdf8;
     --mavi:#0ea5e9;
     --koyu-mavi:#075985;
+
     --lacivert:#0f172a;
+
     --gri:#64748b;
+
     --beyaz:#ffffff;
+
 }
 
 
-/* =========================
-   ARKA PLAN EFEKTLERİ
-   ========================= */
+/* =====================================================
+   GENEL
+===================================================== */
 
-body::before{
-    content:"";
+*{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    background:#ffffff;
+
+    color:var(--lacivert);
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+   ARKA PLAN IŞIKLARI
+===================================================== */
+
+.bg{
 
     position:fixed;
 
-    width:500px;
-    height:500px;
+    border-radius:50%;
 
-    background:var(--acik-mavi);
+    pointer-events:none;
 
-    filter:blur(180px);
+    z-index:-10;
+
+    filter:blur(130px);
+
+}
+
+.bg1{
+
+    width:520px;
+    height:520px;
+
+    background:
+        var(--acik-mavi);
 
     opacity:.12;
 
-    top:-250px;
-    left:-200px;
+    top:-280px;
+    left:-220px;
 
-    pointer-events:none;
+    animation:
+        bgAnim1
+        10s
+        ease-in-out
+        infinite
+        alternate;
 
-    z-index:-2;
 }
 
-body::after{
-    content:"";
-
-    position:fixed;
+.bg2{
 
     width:500px;
     height:500px;
 
-    background:var(--koyu-mavi);
+    background:
+        var(--koyu-mavi);
 
-    filter:blur(190px);
+    opacity:.08;
 
-    opacity:.07;
+    right:-240px;
+    bottom:-250px;
 
-    right:-220px;
-    bottom:-220px;
+    animation:
+        bgAnim2
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
-    pointer-events:none;
-
-    z-index:-2;
 }
 
 
-/* =========================
+@keyframes bgAnim1{
+
+    from{
+
+        transform:
+            translate(0,0);
+
+    }
+
+    to{
+
+        transform:
+            translate(140px,100px);
+
+    }
+
+}
+
+
+@keyframes bgAnim2{
+
+    from{
+
+        transform:
+            translate(0,0);
+
+    }
+
+    to{
+
+        transform:
+            translate(-120px,-100px);
+
+    }
+
+}
+
+
+/* =====================================================
    NAVBAR
-   ========================= */
+===================================================== */
 
 nav{
+
     position:fixed;
 
-    top:0;
-    left:0;
+    top:14px;
+    left:50%;
 
-    width:100%;
-    height:78px;
+    transform:
+        translateX(-50%);
+
+    width:90%;
+
+    max-width:1200px;
+
+    height:68px;
 
     display:flex;
 
     align-items:center;
+
     justify-content:space-between;
 
-    padding:0 7%;
+    padding:
+        0 25px;
 
-    background:rgba(255,255,255,.88);
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:
+        blur(20px);
 
-    border-bottom:1px solid #e2e8f0;
+    border:
+        1px solid
+        #e2e8f0;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 12px 40px
+        rgba(
+            15,
+            23,
+            42,
+            .08
+        );
 
     z-index:1000;
+
 }
 
-.logoText{
-    font-size:22px;
+
+.brand{
+
+    font-size:21px;
 
     font-weight:900;
 
     letter-spacing:2px;
 
-    color:var(--lacivert);
 }
 
-.logoText span{
-    color:var(--koyu-mavi);
+
+.brand span{
+
+    color:
+        var(--koyu-mavi);
+
 }
+
 
 .navLinks{
+
     display:flex;
 
     gap:28px;
+
 }
 
+
 .navLinks a{
-    color:var(--lacivert);
 
     text-decoration:none;
 
-    font-size:13px;
+    color:
+        var(--lacivert);
+
+    font-size:12px;
 
     font-weight:800;
 
     transition:.3s;
+
 }
+
 
 .navLinks a:hover{
-    color:var(--mavi);
+
+    color:
+        var(--mavi);
+
+    transform:
+        translateY(-2px);
+
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-   ========================= */
+===================================================== */
 
 .hero{
+
     min-height:100vh;
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
 
-    padding:130px 20px 80px;
+    padding:
+        130px
+        20px
+        80px;
 
     position:relative;
 
     overflow:hidden;
-}
-
-
-/* Yuvarlak animasyonlar */
-
-.circle{
-    position:absolute;
-
-    border-radius:50%;
-
-    border:1px solid rgba(14,165,233,.15);
-
-    pointer-events:none;
-}
-
-.circle1{
-    width:450px;
-    height:450px;
-
-    animation:rotateCircle 18s linear infinite;
-}
-
-.circle2{
-    width:700px;
-    height:700px;
-
-    animation:rotateCircle 25s linear infinite reverse;
-}
-
-@keyframes rotateCircle{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
 
 }
 
-
-/* HERO CONTENT */
 
 .heroContent{
+
     position:relative;
 
-    z-index:5;
+    z-index:10;
 
-    animation:heroEnter 1.2s ease;
+    animation:
+        heroEnter
+        1.2s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+
 }
+
 
 @keyframes heroEnter{
 
     from{
+
         opacity:0;
-        transform:translateY(50px);
+
+        transform:
+            translateY(60px)
+            scale(.94);
+
     }
 
     to{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:
+            translateY(0)
+            scale(1);
+
     }
 
 }
 
 
-/* =========================
+/* =====================================================
+   ENERJİ HALKALARI
+===================================================== */
+
+.energy{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(
+            14,
+            165,
+            233,
+            .25
+        );
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    pointer-events:none;
+
+}
+
+
+.energy1{
+
+    width:350px;
+    height:350px;
+
+    animation:
+        ring1
+        5s
+        ease-in-out
+        infinite;
+
+}
+
+
+.energy2{
+
+    width:520px;
+    height:520px;
+
+    animation:
+        ring2
+        7s
+        ease-in-out
+        infinite;
+
+}
+
+
+.energy3{
+
+    width:720px;
+    height:720px;
+
+    animation:
+        ring3
+        9s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes ring1{
+
+    0%,100%{
+
+        opacity:.15;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.85)
+            rotate(0deg);
+
+    }
+
+    50%{
+
+        opacity:.6;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1)
+            rotate(180deg);
+
+    }
+
+}
+
+
+@keyframes ring2{
+
+    0%,100%{
+
+        opacity:.1;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.9)
+            rotate(0deg);
+
+    }
+
+    50%{
+
+        opacity:.4;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.04)
+            rotate(-180deg);
+
+    }
+
+}
+
+
+@keyframes ring3{
+
+    0%,100%{
+
+        opacity:.05;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.9);
+
+    }
+
+    50%{
+
+        opacity:.2;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.03);
+
+    }
+
+}
+
+
+/* =====================================================
    LOGO
-   ========================= */
+===================================================== */
 
 .mainLogo{
+
     width:230px;
+
     height:230px;
 
     object-fit:contain;
 
-    margin-bottom:25px;
+    filter:
+
+        drop-shadow(
+            0 0 12px
+            rgba(
+                56,
+                189,
+                248,
+                .3
+            )
+        )
+
+        drop-shadow(
+            0 20px 35px
+            rgba(
+                7,
+                89,
+                133,
+                .15
+            )
+        );
+
+    animation:
+        logoFloat
+        4s
+        ease-in-out
+        infinite;
+
+    transition:.4s;
+
+}
+
+
+.mainLogo:hover{
+
+    transform:
+        scale(1.08);
 
     filter:
-        drop-shadow(0 15px 30px rgba(7,89,133,.18));
 
-    animation:logoFloat 4s ease-in-out infinite;
+        drop-shadow(
+            0 0 25px
+            rgba(
+                56,
+                189,
+                248,
+                .8
+            )
+        );
+
 }
+
 
 @keyframes logoFloat{
 
     0%,100%{
-        transform:translateY(0);
+
+        transform:
+            translateY(0)
+            rotate(0);
+
     }
 
     50%{
-        transform:translateY(-15px);
+
+        transform:
+            translateY(-14px)
+            rotate(2deg);
+
     }
 
 }
 
 
-/* =========================
-   ANA BAŞLIK
-   ========================= */
+/* =====================================================
+   ROMAN FK YAZISI
+===================================================== */
 
-.hero h1{
-    font-size:clamp(55px,10vw,115px);
+.romanTitle{
+
+    margin-top:15px;
+
+    font-size:
+        clamp(
+            55px,
+            10vw,
+            115px
+        );
 
     line-height:.95;
 
@@ -299,90 +616,218 @@ nav{
 
     letter-spacing:5px;
 
-    color:var(--lacivert);
-}
-
-.hero h1 span{
-    color:var(--koyu-mavi);
-}
-
-.subtitle{
-    margin-top:20px;
-
-    color:var(--gri);
-
-    font-size:16px;
-
-    font-weight:600;
-
-    letter-spacing:2px;
-}
-
-
-/* MAVİ ÇİZGİ */
-
-.redLine{
-    width:90px;
-    height:5px;
-
-    margin:25px auto;
-
-    border-radius:20px;
-
     background:
+
         linear-gradient(
             90deg,
-            var(--acik-mavi),
-            var(--koyu-mavi)
+
+            #38bdf8,
+
+            #ffffff,
+
+            #0ea5e9,
+
+            #ffffff,
+
+            #38bdf8
         );
 
-    animation:lineMove 2.5s ease-in-out infinite;
+    background-size:
+        300% auto;
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    -webkit-text-fill-color:
+        transparent;
+
+    animation:
+
+        waveText
+        4s
+        linear
+        infinite,
+
+        titlePulse
+        3s
+        ease-in-out
+        infinite;
+
 }
 
-@keyframes lineMove{
 
-    0%,100%{
-        width:80px;
+@keyframes waveText{
+
+    0%{
+
+        background-position:
+            0% center;
+
     }
 
     50%{
-        width:150px;
+
+        background-position:
+            100% center;
+
+    }
+
+    100%{
+
+        background-position:
+            0% center;
+
     }
 
 }
 
 
-/* =========================
-   BUTONLAR
-   ========================= */
+@keyframes titlePulse{
 
-.buttons{
-    margin-top:30px;
+    0%,100%{
+
+        transform:
+            scale(1);
+
+    }
+
+    50%{
+
+        transform:
+            scale(1.025);
+
+    }
+
 }
 
+
+/* =====================================================
+   ÇİZGİ
+===================================================== */
+
+.blueLine{
+
+    width:90px;
+
+    height:5px;
+
+    margin:
+        25px auto;
+
+    border-radius:30px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--acik-mavi),
+            var(--koyu-mavi),
+            var(--acik-mavi)
+        );
+
+    box-shadow:
+
+        0 0 18px
+        rgba(
+            56,
+            189,
+            248,
+            .45
+        );
+
+    animation:
+        linePulse
+        2.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes linePulse{
+
+    0%,100%{
+
+        width:80px;
+
+        opacity:.7;
+
+    }
+
+    50%{
+
+        width:180px;
+
+        opacity:1;
+
+    }
+
+}
+
+
+.heroSubtitle{
+
+    color:
+        var(--gri);
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+}
+
+
+/* =====================================================
+   BUTON
+===================================================== */
+
+.buttons{
+
+    margin-top:32px;
+
+}
+
+
 .btn{
+
+    position:relative;
+
     display:inline-flex;
 
     align-items:center;
+
     justify-content:center;
 
-    padding:16px 30px;
+    padding:
+        16px
+        30px;
 
-    margin:6px;
+    margin:5px;
 
     border-radius:50px;
 
     text-decoration:none;
 
-    font-weight:800;
+    font-size:13px;
+
+    font-weight:900;
+
+    overflow:hidden;
 
     transition:.35s;
+
 }
 
+
 .instagram{
-    color:white;
+
+    color:#fff;
 
     background:
+
         linear-gradient(
             135deg,
             var(--acik-mavi),
@@ -390,44 +835,134 @@ nav{
         );
 
     box-shadow:
-        0 12px 30px rgba(7,89,133,.25);
+
+        0 12px 35px
+        rgba(
+            7,
+            89,
+            133,
+            .25
+        );
+
 }
 
+
 .instagram:hover{
+
     transform:
-        translateY(-6px)
+        translateY(-7px)
         scale(1.04);
 
     box-shadow:
-        0 18px 40px rgba(7,89,133,.35);
-}
 
-.aboutBtn{
-    color:var(--lacivert);
+        0 20px 55px
+        rgba(
+            7,
+            89,
+            133,
+            .35
+        );
 
-    background:white;
-
-    border:1px solid #dbe4ec;
-}
-
-.aboutBtn:hover{
-    color:white;
-
-    background:var(--lacivert);
-
-    transform:translateY(-6px);
 }
 
 
-/* =========================
+.instagram::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+                255,
+                255,
+                255,
+                .7
+            ),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    animation:
+        shine
+        3s
+        infinite;
+
+}
+
+
+@keyframes shine{
+
+    0%{
+        left:-120%;
+    }
+
+    45%{
+        left:140%;
+    }
+
+    100%{
+        left:140%;
+    }
+
+}
+
+
+.explore{
+
+    color:
+        var(--lacivert);
+
+    background:#fff;
+
+    border:
+        1px solid
+        #dbe4ec;
+
+}
+
+
+.explore:hover{
+
+    background:
+        var(--lacivert);
+
+    color:#fff;
+
+    transform:
+        translateY(-7px);
+
+}
+
+
+/* =====================================================
    BÖLÜMLER
-   ========================= */
+===================================================== */
 
 section{
-    padding:100px 7%;
+
+    padding:
+        110px 7%;
+
 }
 
+
 .sectionTitle{
+
     text-align:center;
 
     font-size:42px;
@@ -436,85 +971,142 @@ section{
 
     margin-bottom:55px;
 
-    color:var(--lacivert);
 }
+
 
 .sectionTitle span{
-    color:var(--koyu-mavi);
+
+    color:
+        var(--koyu-mavi);
+
 }
 
 
-/* =========================
+/* =====================================================
    HAKKIMIZDA
-   ========================= */
+===================================================== */
 
 .about{
-    max-width:950px;
+
+    max-width:1050px;
 
     margin:auto;
+
 }
 
+
 .aboutCard{
+
     position:relative;
 
-    padding:55px 50px;
+    padding:55px;
 
-    background:white;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .96
+        );
 
-    border:1px solid #e2e8f0;
+    border:
+        1px solid
+        #e2e8f0;
 
-    border-radius:28px;
+    border-radius:30px;
 
     box-shadow:
-        0 20px 60px rgba(15,23,42,.08);
+
+        0 25px 70px
+        rgba(
+            15,
+            23,
+            42,
+            .08
+        );
 
     overflow:hidden;
 
-    transition:.4s;
+    opacity:0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        box-shadow .4s;
+
 }
 
+
+.aboutCard.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.aboutCard:hover{
+
+    box-shadow:
+
+        0 35px 90px
+        rgba(
+            7,
+            89,
+            133,
+            .13
+        );
+
+}
+
+
 .aboutCard::before{
+
     content:"";
 
     position:absolute;
 
-    width:7px;
-
-    height:100%;
-
     left:0;
     top:0;
 
+    width:7px;
+    height:100%;
+
     background:
+
         linear-gradient(
             180deg,
             var(--acik-mavi),
             var(--koyu-mavi)
         );
+
 }
 
-.aboutCard:hover{
-    transform:translateY(-8px);
 
-    box-shadow:
-        0 30px 70px rgba(7,89,133,.13);
-}
+.aboutCard h2{
 
-.aboutCard h3{
-    font-size:32px;
-
-    font-weight:900;
+    font-size:31px;
 
     margin-bottom:25px;
 
-    color:var(--lacivert);
 }
 
-.aboutCard h3 span{
-    color:var(--koyu-mavi);
+
+.aboutCard h2 span{
+
+    color:
+        var(--koyu-mavi);
+
 }
 
-.aboutCard p{
+
+.aboutText{
+
     color:#475569;
 
     font-size:15px;
@@ -522,86 +1114,271 @@ section{
     line-height:2;
 
     font-weight:500;
+
 }
 
 
-/* =========================
-   KURUCUSU
-   ========================= */
+/* =====================================================
+   KURUCU
+===================================================== */
 
 .founder{
+
     margin-top:35px;
 
     text-align:center;
 
-    font-size:27px;
+    font-size:28px;
 
     font-weight:900;
 
     letter-spacing:1px;
 
     background:
+
         linear-gradient(
             90deg,
+
             var(--koyu-mavi),
+
             var(--acik-mavi),
+
             #ffffff,
+
             var(--acik-mavi),
+
             var(--koyu-mavi)
         );
 
-    background-size:300% auto;
+    background-size:
+        300% auto;
 
     -webkit-background-clip:text;
 
     background-clip:text;
 
-    -webkit-text-fill-color:transparent;
+    -webkit-text-fill-color:
+        transparent;
 
     animation:
-        founderWave
-        4s linear infinite;
-}
-
-@keyframes founderWave{
-
-    0%{
-        background-position:0% center;
-    }
-
-    50%{
-        background-position:100% center;
-    }
-
-    100%{
-        background-position:0% center;
-    }
+        waveText
+        4s
+        linear
+        infinite;
 
 }
+
 
 .founderTitle{
+
     text-align:center;
 
     margin-top:9px;
 
-    color:var(--koyu-mavi);
+    color:
+        var(--koyu-mavi);
 
     font-size:12px;
 
     font-weight:900;
 
     letter-spacing:3px;
+
 }
 
 
-/* =========================
-   ÖZELLİKLER
-   ========================= */
+/* =====================================================
+   KEM LİGİ KARTI
+===================================================== */
 
-.features{
-    max-width:1000px;
+.league{
 
-    margin:45px auto 0;
+    margin-top:30px;
+
+    position:relative;
+
+    padding:
+        50px
+        30px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f0f9ff
+        );
+
+    border:
+        1px solid
+        #bae6fd;
+
+    box-shadow:
+
+        0 20px 60px
+        rgba(
+            14,
+            165,
+            233,
+            .10
+        );
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        .8s;
+}
+
+
+.league.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.league::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(
+            14,
+            165,
+            233,
+            .2
+        );
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    animation:
+        leagueRing
+        4s
+        linear
+        infinite;
+
+}
+
+
+@keyframes leagueRing{
+
+    from{
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            rotate(0deg)
+            scale(.8);
+
+        opacity:.2;
+
+    }
+
+    to{
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            rotate(360deg)
+            scale(1.2);
+
+        opacity:.7;
+
+    }
+
+}
+
+
+.leagueIcon{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+.league h2{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:
+        clamp(
+            25px,
+            5vw,
+            45px
+        );
+
+    font-weight:900;
+
+    color:
+        var(--koyu-mavi);
+
+}
+
+
+.league p{
+
+    position:relative;
+
+    z-index:2;
+
+    margin-top:12px;
+
+    color:
+        var(--gri);
+
+    font-size:14px;
+
+}
+
+
+/* =====================================================
+   KARTLAR
+===================================================== */
+
+.cards{
+
+    margin-top:30px;
 
     display:grid;
 
@@ -609,318 +1386,633 @@ section{
         repeat(3,1fr);
 
     gap:20px;
+
 }
 
-.feature{
-    padding:35px 20px;
+
+.card{
+
+    position:relative;
+
+    padding:
+        35px 20px;
 
     text-align:center;
 
+    background:#fff;
+
+    border:
+        1px solid
+        #e2e8f0;
+
     border-radius:22px;
 
-    background:white;
-
-    border:1px solid #e2e8f0;
-
     box-shadow:
-        0 10px 30px rgba(15,23,42,.05);
 
-    transition:.4s;
+        0 10px 30px
+        rgba(
+            15,
+            23,
+            42,
+            .04
+        );
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        .4s;
+
 }
 
-.feature:hover{
-    transform:translateY(-8px);
 
-    border-color:var(--acik-mavi);
+.card.show{
 
-    box-shadow:
-        0 20px 45px rgba(14,165,233,.12);
+    opacity:1;
+
+    transform:
+        translateY(0);
+
 }
 
-.featureIcon{
-    font-size:38px;
+
+.card:hover{
+
+    transform:
+        translateY(-12px);
+
+    border-color:
+        var(--acik-mavi);
+
+    box-shadow:
+
+        0 25px 60px
+        rgba(
+            14,
+            165,
+            233,
+            .15
+        );
+
+}
+
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-100%;
+    left:-100%;
+
+    width:50%;
+    height:300%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(
+                255,
+                255,
+                255,
+                .9
+            ),
+            transparent
+        );
+
+    transform:
+        rotate(25deg);
+
+    transition:.8s;
+
+}
+
+
+.card:hover::after{
+
+    left:150%;
+
+}
+
+
+.cardIcon{
+
+    font-size:40px;
 
     margin-bottom:15px;
+
 }
 
-.feature h4{
-    font-size:17px;
 
-    color:var(--koyu-mavi);
+.card h3{
+
+    color:
+        var(--koyu-mavi);
+
 }
 
-.feature p{
-    color:#64748b;
+
+.card p{
+
+    color:
+        var(--gri);
 
     font-size:13px;
 
     margin-top:8px;
+
 }
 
 
-/* =========================
-   SAAT
-   ========================= */
+/* =====================================================
+   CANLI SAAT
+===================================================== */
 
-.clockArea{
+.clockSection{
+
     text-align:center;
 
-    background:#f8fafc;
+    background:
+        #f8fafc;
 
-    border-top:1px solid #e2e8f0;
+    border-top:
+        1px solid
+        #e2e8f0;
 
-    border-bottom:1px solid #e2e8f0;
+    border-bottom:
+        1px solid
+        #e2e8f0;
+
 }
 
+
 .clock{
-    font-size:70px;
+
+    font-size:
+        clamp(
+            42px,
+            8vw,
+            72px
+        );
 
     font-weight:900;
 
-    letter-spacing:5px;
+    letter-spacing:6px;
 
-    color:var(--lacivert);
+    color:
+        var(--lacivert);
+
 }
+
 
 .clock span{
-    color:var(--mavi);
+
+    color:
+        var(--mavi);
+
 }
 
+
 .date{
+
     margin-top:12px;
 
-    color:#64748b;
+    color:
+        var(--gri);
 
     font-size:15px;
 
     font-weight:600;
+
 }
 
 
-/* =========================
-   INSTAGRAM BÖLÜMÜ
-   ========================= */
+/* =====================================================
+   INSTAGRAM
+===================================================== */
 
 .instagramSection{
-    padding-top:110px;
 
-    padding-bottom:110px;
+    padding:
+        110px 7%;
+
 }
 
+
 .instagramBox{
-    max-width:900px;
+
+    position:relative;
+
+    max-width:950px;
 
     margin:auto;
 
-    padding:70px 30px;
+    padding:
+        75px 30px;
 
     text-align:center;
 
-    border-radius:30px;
+    color:#fff;
+
+    border-radius:32px;
 
     background:
+
         linear-gradient(
             135deg,
             var(--lacivert),
             var(--koyu-mavi)
         );
 
-    color:white;
-
-    position:relative;
-
     overflow:hidden;
 
     box-shadow:
-        0 25px 70px rgba(7,89,133,.18);
+
+        0 30px 80px
+        rgba(
+            7,
+            89,
+            133,
+            .2
+        );
+
+    opacity:0;
+
+    transform:
+        translateY(50px);
+
+    transition:.8s;
+
 }
 
+
+.instagramBox.show{
+
+    opacity:1;
+
+    transform:
+        translateY(0);
+
+}
+
+
 .instagramBox::before{
+
     content:"";
 
     position:absolute;
 
-    width:300px;
-    height:300px;
+    width:450px;
 
-    background:var(--acik-mavi);
+    height:450px;
 
-    filter:blur(100px);
+    background:
+        var(--acik-mavi);
 
-    opacity:.25;
+    filter:
+        blur(120px);
 
-    right:-100px;
-    top:-170px;
+    opacity:.2;
+
+    right:-200px;
+
+    top:-250px;
+
+    animation:
+        instaGlow
+        6s
+        ease-in-out
+        infinite
+        alternate;
+
 }
+
+
+@keyframes instaGlow{
+
+    from{
+
+        transform:
+            translate(0,0);
+
+    }
+
+    to{
+
+        transform:
+            translate(
+                -100px,
+                120px
+            );
+
+    }
+
+}
+
 
 .instagramBox h2{
+
     position:relative;
 
-    font-size:38px;
+    z-index:2;
+
+    font-size:40px;
 
     font-weight:900;
+
 }
+
 
 .instagramBox h2 span{
-    color:var(--acik-mavi);
+
+    color:
+        var(--acik-mavi);
+
 }
+
 
 .instagramBox p{
+
     position:relative;
 
-    color:#cbd5e1;
+    z-index:2;
 
-    margin:18px 0 30px;
+    margin:
+        18px 0 30px;
+
+    color:
+        #cbd5e1;
+
 }
 
 
-/* =========================
+/* =====================================================
    FOOTER
-   ========================= */
+===================================================== */
 
 footer{
-    padding:35px 20px;
+
+    padding:
+        35px 20px;
 
     text-align:center;
 
-    border-top:1px solid #e2e8f0;
+    border-top:
+        1px solid
+        #e2e8f0;
 
-    color:#64748b;
+    color:
+        var(--gri);
 
     font-size:13px;
+
 }
+
 
 footer strong{
-    color:var(--koyu-mavi);
+
+    color:
+        var(--koyu-mavi);
+
 }
 
 
-/* =========================
+/* =====================================================
    MOBİL
-   ========================= */
+===================================================== */
 
 @media(max-width:750px){
 
     nav{
-        height:70px;
 
-        padding:0 20px;
+        top:8px;
+
+        width:94%;
+
+        height:65px;
+
+        padding:
+            0 20px;
+
     }
+
 
     .navLinks{
+
         display:none;
+
     }
 
-    .logoText{
+
+    .brand{
+
         font-size:19px;
+
     }
 
-    .mainLogo{
-        width:175px;
-        height:175px;
-    }
 
     .hero{
-        padding-top:110px;
+
+        padding:
+            110px
+            20px
+            70px;
+
     }
 
-    .hero h1{
-        font-size:58px;
+
+    .mainLogo{
+
+        width:175px;
+
+        height:175px;
+
+    }
+
+
+    .romanTitle{
+
+        font-size:57px;
 
         letter-spacing:2px;
+
     }
 
-    .subtitle{
-        font-size:12px;
 
-        letter-spacing:1px;
+    .heroSubtitle{
+
+        font-size:10px;
+
+        letter-spacing:1.5px;
+
     }
 
-    .circle1{
-        width:320px;
-        height:320px;
+
+    .energy1{
+
+        width:280px;
+        height:280px;
+
     }
 
-    .circle2{
-        width:500px;
-        height:500px;
+
+    .energy2{
+
+        width:400px;
+        height:400px;
+
     }
+
+
+    .energy3{
+
+        width:520px;
+        height:520px;
+
+    }
+
 
     section{
-        padding:80px 20px;
+
+        padding:
+            80px 20px;
+
     }
+
 
     .sectionTitle{
+
         font-size:33px;
+
     }
+
 
     .aboutCard{
-        padding:40px 28px;
+
+        padding:
+            40px 28px;
+
     }
 
-    .aboutCard h3{
-        font-size:27px;
+
+    .aboutCard h2{
+
+        font-size:26px;
+
     }
 
-    .aboutCard p{
+
+    .aboutText{
+
         font-size:14px;
 
         line-height:1.9;
+
     }
+
 
     .founder{
+
         font-size:21px;
+
     }
 
-    .features{
+
+    .cards{
+
         grid-template-columns:1fr;
+
     }
+
+
+    .league{
+
+        padding:
+            45px 20px;
+
+    }
+
+
+    .league h2{
+
+        font-size:27px;
+
+    }
+
 
     .clock{
-        font-size:45px;
+
+        font-size:43px;
 
         letter-spacing:2px;
+
     }
+
 
     .instagramBox{
-        padding:55px 20px;
+
+        padding:
+            55px 20px;
+
     }
 
+
     .instagramBox h2{
+
         font-size:30px;
+
+    }
+
+
+    .btn{
+
+        width:90%;
+
+        margin:
+            6px auto;
+
     }
 
 }
 
 
-/* =========================
-   ÇOK KÜÇÜK TELEFONLAR
-   ========================= */
-
 @media(max-width:400px){
 
-    .hero h1{
-        font-size:47px;
+    .romanTitle{
+
+        font-size:46px;
+
     }
+
 
     .mainLogo{
-        width:150px;
-        height:150px;
+
+        width:145px;
+
+        height:145px;
+
     }
 
-    .btn{
-        width:90%;
-
-        margin:5px auto;
-    }
 
     .clock{
-        font-size:37px;
+
+        font-size:35px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -928,14 +2020,27 @@ footer strong{
 
 
 <!-- =====================================================
+     ARKA PLAN
+===================================================== -->
+
+<div class="bg bg1"></div>
+
+<div class="bg bg2"></div>
+
+
+<!-- =====================================================
      NAVBAR
-     ===================================================== -->
+===================================================== -->
 
 <nav>
 
-    <div class="logoText">
-        ROMAN <span>FK</span>
+    <div class="brand">
+
+        ROMAN
+        <span>FK</span>
+
     </div>
+
 
     <div class="navLinks">
 
@@ -945,6 +2050,10 @@ footer strong{
 
         <a href="#hakkimizda">
             HAKKIMIZDA
+        </a>
+
+        <a href="#lig">
+            KEM LİGİ
         </a>
 
         <a href="#saat">
@@ -962,19 +2071,23 @@ footer strong{
 
 <!-- =====================================================
      ANA SAYFA
-     ===================================================== -->
+===================================================== -->
 
-<section class="hero" id="anasayfa">
+<section
+    class="hero"
+    id="anasayfa"
+>
 
-    <div class="circle circle1"></div>
 
-    <div class="circle circle2"></div>
+    <div class="energy energy1"></div>
+
+    <div class="energy energy2"></div>
+
+    <div class="energy energy3"></div>
 
 
     <div class="heroContent">
 
-
-        <!-- LOGO -->
 
         <img
             src="logo.png"
@@ -983,55 +2096,69 @@ footer strong{
         >
 
 
-        <!-- BAŞLIK -->
+        <h1 class="romanTitle">
 
-        <h1>
-            ROMAN <span>FK</span>
+            ROMAN FK
+
         </h1>
 
 
-        <div class="redLine"></div>
+        <div class="blueLine"></div>
 
 
-        <p class="subtitle">
+        <p class="heroSubtitle">
+
             FUTBOL • MÜCADELE • TAKIM RUHU
+
         </p>
 
 
         <div class="buttons">
+
 
             <a
                 href="https://www.instagram.com/dorukkral35/"
                 target="_blank"
                 class="btn instagram"
             >
+
                 📸 INSTAGRAM'A GİT
+
             </a>
 
 
             <a
                 href="#hakkimizda"
-                class="btn aboutBtn"
+                class="btn explore"
             >
+
                 KULÜBÜ KEŞFET
+
             </a>
 
+
         </div>
+
 
     </div>
 
 </section>
 
 
-
 <!-- =====================================================
      HAKKIMIZDA
-     ===================================================== -->
+===================================================== -->
 
-<section id="hakkimizda">
+<section
+    id="hakkimizda"
+>
+
 
     <h2 class="sectionTitle">
-        HOŞ <span>GELDİNİZ</span>
+
+        HOŞ
+        <span>GELDİNİZ</span>
+
     </h2>
 
 
@@ -1041,12 +2168,15 @@ footer strong{
         <div class="aboutCard">
 
 
-            <h3>
-                Merhabalar, <span>biz Roman FK!</span>
-            </h3>
+            <h2>
+
+                Hoş
+                <span>Geldiniz</span>
+
+            </h2>
 
 
-            <p>
+            <p class="aboutText">
 
                 MERHABALAR BİZ ROMAN FK.
                 BİZ YENİ NESİL İZMİR KEMALPAŞA
@@ -1061,8 +2191,6 @@ footer strong{
 
             </p>
 
-
-            <!-- KURUCUSU -->
 
             <div class="founder">
 
@@ -1080,62 +2208,132 @@ footer strong{
 
         </div>
 
-    </div>
+
+        <!-- =================================================
+             KEM LİGİNDE MÜCADELE
+        ================================================= -->
 
 
+        <div
+            class="league"
+            id="lig"
+        >
 
-    <!-- ÖZELLİKLER -->
 
-    <div class="features">
+            <div class="leagueIcon">
 
-
-        <div class="feature">
-
-            <div class="featureIcon">
                 ⚽
+
             </div>
 
-            <h4>
-                FUTBOL
-            </h4>
 
-            <p>
-                Futbol sevgisi
-            </p>
+            <h2>
 
-        </div>
-
-
-        <div class="feature">
-
-            <div class="featureIcon">
-                🔥
-            </div>
-
-            <h4>
+                KEM LİGİNDE
                 MÜCADELE
-            </h4>
+
+            </h2>
+
 
             <p>
-                Son düdüğe kadar
+
+                Roman FK olarak
+                KEM LİGİNDE mücadele ediyoruz.
+
             </p>
+
 
         </div>
 
 
-        <div class="feature">
+        <!-- =================================================
+             TAKIM DEĞERLERİ
+        ================================================= -->
 
-            <div class="featureIcon">
-                🏆
+
+        <div class="cards">
+
+
+            <div class="card">
+
+
+                <div class="cardIcon">
+
+                    ⚽
+
+                </div>
+
+
+                <h3>
+
+                    FUTBOL
+
+                </h3>
+
+
+                <p>
+
+                    Futbol bizim tutkumuz.
+
+                </p>
+
+
             </div>
 
-            <h4>
-                HEDEF
-            </h4>
 
-            <p>
-                Kem Ligi'nde mücadele
-            </p>
+            <div class="card">
+
+
+                <div class="cardIcon">
+
+                    🔥
+
+                </div>
+
+
+                <h3>
+
+                    MÜCADELE
+
+                </h3>
+
+
+                <p>
+
+                    Son düdüğe kadar mücadele.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <div class="cardIcon">
+
+                    🏆
+
+                </div>
+
+
+                <h3>
+
+                    HEDEF
+
+                </h3>
+
+
+                <p>
+
+                    Her zaman daha iyisi.
+
+                </p>
+
+
+            </div>
+
 
         </div>
 
@@ -1145,17 +2343,20 @@ footer strong{
 </section>
 
 
-
 <!-- =====================================================
      CANLI SAAT
-     ===================================================== -->
+===================================================== -->
 
-<section class="clockArea" id="saat">
+<section
+    class="clockSection"
+    id="saat"
+>
 
 
     <h2 class="sectionTitle">
 
-        <span>CANLI SAAT</span>
+        CANLI
+        <span>SAAT</span>
 
     </h2>
 
@@ -1165,7 +2366,11 @@ footer strong{
         id="clock"
     >
 
-        00<span>:</span>00<span>:</span>00
+        00
+        <span>:</span>
+        00
+        <span>:</span>
+        00
 
     </div>
 
@@ -1183,10 +2388,9 @@ footer strong{
 </section>
 
 
-
 <!-- =====================================================
      INSTAGRAM
-     ===================================================== -->
+===================================================== -->
 
 <section
     class="instagramSection"
@@ -1199,14 +2403,17 @@ footer strong{
 
         <h2>
 
-            ROMAN <span>FK</span>
+            ROMAN
+            <span>FK</span>
 
         </h2>
 
 
         <p>
 
-            Takımımızı Instagram'dan takip et.
+            Roman FK'nın
+            paylaşımlarını
+            Instagram'dan takip et.
 
         </p>
 
@@ -1228,52 +2435,108 @@ footer strong{
 </section>
 
 
-
 <!-- =====================================================
      FOOTER
-     ===================================================== -->
+===================================================== -->
 
 <footer>
 
-    © 2026
-
     <strong>
-        ROMAN FK
+        Roman FK
     </strong>
 
-    — Tüm hakları gizlidir.
+    — Roman FK hakları gizlidir.
 
 </footer>
 
 
-
-<!-- =====================================================
-     SAAT JAVASCRIPT
-     ===================================================== -->
-
 <script>
+
+
+/* =====================================================
+   SCROLL ANİMASYONLARI
+===================================================== */
+
+const elements =
+    document.querySelectorAll(
+        ".aboutCard, .league, .card, .instagramBox"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.15
+        }
+    );
+
+
+elements.forEach(
+    element => {
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CANLI SAAT
+===================================================== */
 
 function updateClock(){
 
-    const now = new Date();
+
+    const now =
+        new Date();
 
 
-    let hours =
+    const hours =
         String(
             now.getHours()
-        ).padStart(2,'0');
+        ).padStart(
+            2,
+            "0"
+        );
 
 
-    let minutes =
+    const minutes =
         String(
             now.getMinutes()
-        ).padStart(2,'0');
+        ).padStart(
+            2,
+            "0"
+        );
 
 
-    let seconds =
+    const seconds =
         String(
             now.getSeconds()
-        ).padStart(2,'0');
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     document.getElementById(
@@ -1298,10 +2561,17 @@ function updateClock(){
         now.toLocaleDateString(
             "tr-TR",
             {
-                weekday:"long",
-                year:"numeric",
-                month:"long",
-                day:"numeric"
+                weekday:
+                    "long",
+
+                year:
+                    "numeric",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric"
             }
         );
 
@@ -1310,13 +2580,16 @@ function updateClock(){
 
 updateClock();
 
+
 setInterval(
     updateClock,
     1000
 );
 
+
 </script>
 
 
 </body>
+
 </html>
